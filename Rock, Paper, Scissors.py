@@ -6,8 +6,8 @@ print ("Rock, Paper, Scissors")
 # A dict which tells what it loses against
 rps={"rock":"paper","paper":"scissors","scissors":"rock"}
 
-pscore = 0
-cscore = 0
+player = 0
+computer = 0
 streak = 0
 
 # A functions to see if the players wants to play and quit
@@ -26,14 +26,13 @@ def playing():
 def streak_func():
     global streak
     if streak >= 3:
-        streak = streak+1
         print ("Congrats your on a streak of",streak)
     elif random_c==rps[user_inp] and streak >= 3:
         streak = 0
         print ("Oh no you broke your streak of",streak)
-    elif user_inp==random_c:
+    elif user_inp==random_c and streak >= 3:
         streak = streak
-        print ("Its a draw your streak stays the same!")
+        print ("Its a draw so your streak of",streak,"stays the same!")
 
 
 while True:
@@ -46,8 +45,8 @@ while True:
         break
 
     # Creates the random choice of the computer
-    choices = ("Rock","Paper","Scissors")
-    random_c = random.choice(choices).lower()
+    choices = ("rock","paper","scissors")
+    random_c = random.choice(choices)
 
     print ("You chose",user_inp)
     print ("The computer chose",random_c)
@@ -58,13 +57,14 @@ while True:
         playing()
 
     elif random_c==rps[user_inp]:
-        cscore = cscore+1
-        print ("You lost!. Your score is",pscore,"and the computers score is",cscore)
+        computer = computer+1
+        print ("You lost!. Your score is",player,"and the computers score is",computer)
         streak_func()
         playing()
 
     else:
-        pscore = pscore+1
-        print ("You won!. Your score is",pscore,"and the computers score is",cscore)
+        streak = streak+1
+        player = player+1
+        print ("You won!. Your score is",player,"and the computers score is",computer)
         streak_func()
         playing()
